@@ -1,0 +1,21 @@
+@import 'utils';
+
+.title {
+  svg {
+    height: 45px;
+    width: 165px;
+    position: relative;
+    .word {
+      font-family: 'Tangerine', cursive;
+      letter-spacing: 0.05em;
+      font-size: 50px;
+      font-weight: bold;
+      @include media ('<=medium') {
+        font-size: 45px;
+      }
+      @include media ('<=400px') {
+        font-size: 40px;
+      }
+    }
+  }
+}

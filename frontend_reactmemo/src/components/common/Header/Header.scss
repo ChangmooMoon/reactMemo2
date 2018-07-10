@@ -1,0 +1,29 @@
+@import 'utils';
+
+.button {
+  width : 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1) ;
+    transition: all 0.5s ease;
+  }
+}
+.button2 {
+  &:hover {
+    transform: rotateZ(180deg);
+    transition: all 1s ease;
+  }
+}
+
+.header-content{
+  width: 100vw;
+  height: 3.5rem;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  @include material-shadow(2)
+}
