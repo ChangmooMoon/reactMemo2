@@ -4,7 +4,7 @@ import header from './header'
 import label from './label'
 import memoList from './memoList'
 import memoModal from './memoModal'
-import hamburgerModal from './hamburgerModal'
+import db from './db'
 
 
 
@@ -13,5 +13,5 @@ export default combineReducers({
   label,
   memoList,
   memoModal,
-  hamburgerModal
+  db
 })
