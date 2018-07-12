@@ -11,16 +11,16 @@ export const resetChosenLabel = createAction(RESET_CHOSEN_LABEL, value => value)
 
 // initial State
 const initialState = Map({
-  chosenLabel : null
+  targetLabel : null
 })
 
 // reducer
 
 export default handleActions({
   [CHOOSE_LABEL] : (state, action) => {
-    return state.set('chosenLabel', action.payload)
+    return state.set('targetLabel', action.payload)
   },
   [RESET_CHOSEN_LABEL] : (state, action) => {
-    return state.set('chosenLabel', null)
+    return state.set('targetLabel', null)
   }
 }, initialState)

@@ -3,7 +3,7 @@ import styles from './PageTemplate.scss'
 import classNames from 'classnames/bind'
 
 import HeaderContainer from 'containers/HeaderContainer'
-import NavContainer from 'containers/NavContainer'
+import HamburgerModalContainer from 'containers/HamburgerModalContainer'
 import MemoModalContainer from 'containers/MemoModalContainer'
 
 const cx = classNames.bind(styles)
@@ -11,7 +11,7 @@ const cx = classNames.bind(styles)
 const PageTemplate = ({children}) => {
   return (
     <div className={cx('template')}>
-      {/* <NavContainer /> */}
+      <HamburgerModalContainer />
       {/* <MemoModalContainer /> */}
         <HeaderContainer/>
         <main>

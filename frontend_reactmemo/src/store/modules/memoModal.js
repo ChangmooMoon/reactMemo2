@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
-import { Map,List } from 'immutable'
+import { Map, List } from 'immutable'
 
 // action types
 
@@ -8,7 +8,8 @@ import { Map,List } from 'immutable'
 
 // initial State
 const initialState = Map({
-  MemoList : List([])
+  title : '',
+  content: '',
 })
 
 // reducer

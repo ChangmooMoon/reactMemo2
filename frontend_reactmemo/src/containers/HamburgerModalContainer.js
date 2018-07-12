@@ -3,29 +3,31 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as header from 'store/modules/header'
-import Header from 'components/common/Header'
+import HamburgerModal from 'components/HamburgerModal'
 
-
-class HeaderContainer extends Component {
+class HamburgerModalContainer extends Component {
 
   toggleHamburgerModal = () => {
     const { header } = this.props
     header.toggleHamburgerModal()
   }
 
-  changeSearchKeyword = (e) => {
-    const { header } = this.props
-    header.changeSearchKeyword(e.target.value)
+  componentDidUpdate(prevProps,prevState) {
+    const { isHamburgerModalOn } = prevProps.header
+    return (
+      <HamburgerModal
+        isHamburgerModalOn={isHamburgerModalOn}
+      />
+    )
   }
 
   render() {
-    const { toggleHamburgerModal, changeSearchKeyword } = this
-    const { keyword } = this.props.header
+    const { toggleHamburgerModal } = this
+    const { isHamburgerModalOn } = this.props
     return (
-      <Header
+      <HamburgerModal
         toggleHamburgerModal={toggleHamburgerModal}
-        changeSearchKeyword={changeSearchKeyword}
-        keyword={keyword}
+        isHamburgerModalOn={isHamburgerModalOn}
       />
     );
   }
@@ -34,7 +36,6 @@ class HeaderContainer extends Component {
 let mapStateToProps = state => {
   return {
     isHamburgerModalOn: state.header.isHamburgerModalOn,
-    Keyword: state.header.keyword
   }
 }
 
@@ -44,4 +45,4 @@ let mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(HamburgerModalContainer)

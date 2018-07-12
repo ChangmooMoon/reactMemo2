@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
+import { Map } from 'immutable'
 
 // action types
 
@@ -6,8 +7,8 @@ import { createAction, handleActions } from 'redux-actions'
 // action creators
 
 // initial State
-const initialState = {
-}
+const initialState = Map({
+})
 
 // reducer
 

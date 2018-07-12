@@ -1,11 +1,17 @@
 import { combineReducers } from 'redux'
 
+import header from './header'
 import label from './label'
 import memoList from './memoList'
-import memo from './memo'
+import memoModal from './memoModal'
+import hamburgerModal from './hamburgerModal'
+
+
 
 export default combineReducers({
+  header,
   label,
   memoList,
-  memo
+  memoModal,
+  hamburgerModal
 })

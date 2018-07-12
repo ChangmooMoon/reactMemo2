@@ -17,7 +17,6 @@
   .bar{
     height: 60px;
     width: 220px;
-    font-size: 30px;
     border: none;
     outline: none;
     color: $oc-gray-9;
@@ -35,6 +34,7 @@
     }
     &:focus {
       width: 300px;
+      font-size: 20px;
       cursor: text;
       border-bottom: 1px solid $oc-gray-6;
       @include media('<large') {

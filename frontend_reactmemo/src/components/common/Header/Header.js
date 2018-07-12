@@ -1,47 +1,50 @@
 import React from 'react';
 import styles from './Header.scss'
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
 
 import TitleSVG from 'components/common/TitleSVG'
 import Hamburger from 'static/Hamburger'
-import AddCircle from 'static/AddCircle'
-import Search from 'static/Search'
 
 const cx = classNames.bind(styles)
 
-const HamburgerButton = () => {
+const HamburgerButton = ({toggleHamburgerModal}) => {
   return (
-    <span className={cx('button')}>
+    <span className={cx('button')} onClick={toggleHamburgerModal}>
       <Hamburger />
     </span>
   )
 }
 
-const AddCircleButton = () => {
-  return (
-    <span className={cx('button')}>
-      <AddCircle />
-    </span>
-  )
-}
 
-const SearchBar = () => {
+const SearchBar = ({
+  changeSearchKeyword,
+  keyword
+}) => {
   return (
   <div className={cx('searchbar')}>
-    <form action="">
-      <input className={cx('bar')} type="text" placeholder="search"/>
-      <div className={cx('search-icon')} value="Rechercher" type="submit"/>
+    <form onSubmit={e => {e.preventDefault()}}>
+      <input
+        className={cx('bar')}
+        type="text"
+        placeholder="search"
+        value={keyword}
+        onChange={changeSearchKeyword}
+        />
+      <div className={cx('search-icon')}/>
     </form>
 </div>
   )
 }
 
-const Header = () => (
+const Header = ({
+  toggleHamburgerModal,
+  changeSearchKeyword,
+  keyword
+}) => (
   <header className={cx('header-content')}>
-      <HamburgerButton />
+      <HamburgerButton toggleHamburgerModal={toggleHamburgerModal}/>
       <TitleSVG />
-      <SearchBar />
+      <SearchBar changeSearchKeyword={changeSearchKeyword} keyword={keyword} />
   </header>
 )
 

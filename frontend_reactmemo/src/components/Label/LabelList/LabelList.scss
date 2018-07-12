@@ -27,7 +27,9 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  opacity: 0.5;
   &:hover {
+    opacity: 1;
     transform: scale(1.1) ;
     transition: all 0.3s ease;
   }
