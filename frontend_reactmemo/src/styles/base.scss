@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
-@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
 @import url('https://fonts.googleapis.com/css?family=Tangerine');
-
+@import url('https://fonts.googleapis.com/css?family=Anton');
+@import 'utils';
 
 body {
   margin: 0;
@@ -11,7 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   user-select: none;
-
+  background: $oc-gray-1;
 }
 
 * {

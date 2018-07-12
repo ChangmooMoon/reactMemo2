@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import TitleSVG from 'components/common/TitleSVG'
 import Hamburger from 'static/Hamburger'
 import AddCircle from 'static/AddCircle'
-import Setting from 'static/Setting'
+import Search from 'static/Search'
 
 const cx = classNames.bind(styles)
 
@@ -26,18 +26,22 @@ const AddCircleButton = () => {
   )
 }
 
-const SettingButton = () => {
+const SearchBar = () => {
   return (
-    <span className={cx('button','button2')}>
-      <Setting />
-    </span>
+  <div className={cx('searchbar')}>
+    <form action="">
+      <input className={cx('bar')} type="text" placeholder="search"/>
+      <div className={cx('search-icon')} value="Rechercher" type="submit"/>
+    </form>
+</div>
   )
 }
+
 const Header = () => (
   <header className={cx('header-content')}>
       <HamburgerButton />
       <TitleSVG />
-      <SettingButton />
+      <SearchBar />
   </header>
 )
 

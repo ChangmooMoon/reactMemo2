@@ -2,21 +2,21 @@ import React from 'react';
 import PageTemplate from 'components/common/PageTemplate'
 
 import LabelListWrapper from 'components/Label/LabelListWrapper'
-import LabelList from 'components/Label/LabelList'
+import LabelContainer from 'containers/LabelContainer'
 
 import MemoListBoxWrapper from 'components/MemoList/MemoListBoxWrapper'
-import MemoListBox from 'components/MemoList/MemoListBox'
+import MemoListContainer from 'containers/MemoListContainer'
 
 const mainPage = () => {
   return (
     <PageTemplate>
 
       <LabelListWrapper>
-        <LabelList />
+        <LabelContainer />
       </LabelListWrapper>
 
       <MemoListBoxWrapper>
-        <MemoListBox />
+        <MemoListContainer />
       </MemoListBoxWrapper>
 
     </PageTemplate>

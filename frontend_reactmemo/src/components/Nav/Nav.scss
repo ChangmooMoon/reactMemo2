@@ -1,0 +1,22 @@
+@import 'utils';
+
+.side-nav {
+  position: fixed;
+  display: flex;
+  z-index: 5;
+  .left {
+    width: 200px;
+    height: 100vh;
+    transition: 0.5s;
+    background: darken(#b34646,10%);
+    padding-top: 3rem;
+    padding-left: 2rem;
+    font-size: 2rem;
+    font-family: 'Anton', sans-serif;
+  }
+  .right {
+    width: calc(100vw - 200px);
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+  }
+}
