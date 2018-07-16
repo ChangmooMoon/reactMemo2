@@ -5,7 +5,7 @@
     display: grid;
     overflow: auto;
     margin: 1rem;
-    grid-template-columns: 100px calc(100vw - 100px - 3rem);
+    grid-template-columns: 110px calc(100vw - 100px - 3rem);
     grid-template-rows: calc(100vh - 5rem);
     grid-column-gap: 1rem;
   }

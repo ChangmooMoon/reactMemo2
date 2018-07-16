@@ -15,7 +15,7 @@
 .memo-item {
   border: none;
   padding: 1.5rem;
-  background: #ffffcc;
+  background: $page-color;
   cursor: pointer;
   &:hover {
     transition: all 0.3s ease;
@@ -41,6 +41,8 @@
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  grid-auto-columns: 200px;
   @include media('<970px') { //872
     grid-template-columns: repeat(3, 1fr);
   }
