@@ -27,7 +27,6 @@ class LabelContainer extends Component {
   }
 
   onChangeTargetLabel = (e) => { // click label event
-    console.log(e)
     this.clickedOnce = undefined
     const { label } = this.props
     label.onChangeTargetLabel(e.target.value)
@@ -58,6 +57,15 @@ class LabelContainer extends Component {
     }
   }
 
+  editLabelName = async (e) => {
+    const { label, targetLabel, newLabelName } = this.props
+    if (e.charCode === 13) {
+      await label.editLabelName(targetLabel,newLabelName)
+      .then(
+        this.handleLabelEdit()
+      )}
+  }
+
   getLabelList = () =>  {
     const { db } = this.props
     db.getLabelList()
@@ -77,7 +85,7 @@ class LabelContainer extends Component {
 
   render() {
     const { data, addLabelMode, editLabelMode, targetLabel } = this.props
-    const { handleLabelAdd,onChangeNewLabelName,createNewLabel, onChangeTargetLabel,handleClick } = this
+    const { handleLabelAdd,onChangeNewLabelName,createNewLabel,editLabelName, onChangeTargetLabel,handleClick } = this
     return (
       <LabelList
         data={data}
@@ -88,6 +96,7 @@ class LabelContainer extends Component {
         handleLabelAdd={handleLabelAdd}
         onChangeNewLabelName={onChangeNewLabelName}
         createNewLabel={createNewLabel}
+        editLabelName={editLabelName}
         onChangeTargetLabel={onChangeTargetLabel}
         handleClick={handleClick}
       />

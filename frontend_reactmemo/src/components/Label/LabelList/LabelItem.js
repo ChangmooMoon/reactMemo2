@@ -21,6 +21,7 @@ const LabelItem = ({
   editLabelMode,
   onChange,
   onClick,
+  onKeyPress,
   connectDragSource,
 }) => {
   const clicked = (value === targetLabel) ? 'clicked' : 'label'
@@ -36,6 +37,7 @@ const LabelItem = ({
             autoFocus
             maxLength='11'
             onChange={onChange}
+            onKeyPress={onKeyPress}
           />
         )
         :

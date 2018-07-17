@@ -37,6 +37,7 @@ const LabelList = ({
   handleLabelAdd,
   onChangeNewLabelName,
   createNewLabel,
+  editLabelName,
   onChangeTargetLabel,
   handleClick
 }) => {
@@ -60,6 +61,7 @@ const LabelList = ({
             targetLabel={targetLabel}
             editLabelMode={editLabelMode}
             onChange={onChangeNewLabelName}
+            onKeyPress={editLabelName}
             onClick={handleClick}
             />
           )

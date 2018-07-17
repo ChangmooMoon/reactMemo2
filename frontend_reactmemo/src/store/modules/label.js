@@ -16,12 +16,17 @@ const DELETE_LABEL = 'label/DELETE_LABEL'
 const DELETE_LABEL_SUCCESS = 'label/DELETE_LABEL_SUCCESS'
 const DELETE_LABEL_FAILURE = 'label/DELETE_LABEL_FAILURE'
 
+const EDIT_LABEL = 'label/EDIT_LABEL'
+const EDIT_LABEL_SUCCESS = 'label/EDIT_LABEL_SUCCESS'
+const EDIT_LABEL_FAILURE = 'label/EDIT_LABEL_FAILURE'
+
 // action creators
 export const onChangeTargetLabel = createAction(ONCHANGE_TARGET_LABEL, v => v)
 export const resetTargetLabel = createAction(RESET_TARGET_LABEL, v => v)
 export const addLabel = createAction(ADD_LABEL_MODE, v => v)
 export const editLabel = createAction(EDIT_LABEL_MODE, v => v)
 export const onChangeNewLabelName = createAction(ONCHANGE_NEW_LABEL_NAME, v => v)
+
 export const enrollLabel = (title) => dispatch => {
   dispatch({type:ENROLL_LABEL})
   return api.enrollNewLabel(title)
@@ -56,6 +61,26 @@ export const deleteLabel = (id) => dispatch => {
       err => {
         dispatch({
           type: DELETE_LABEL_FAILURE,
+          payload: err
+        })
+        throw(err)
+      })
+}
+
+export const editLabelName = (id, title) => dispatch => {
+  dispatch({type:EDIT_LABEL})
+  return api.editLabel(id,title)
+  .then(
+    res => {
+      dispatch({
+        type: EDIT_LABEL_SUCCESS,
+        payload:res
+      })
+    })
+    .catch(
+      err => {
+        dispatch({
+          type: EDIT_LABEL_FAILURE,
           payload: err
         })
         throw(err)
