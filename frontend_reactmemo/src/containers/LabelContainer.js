@@ -11,12 +11,34 @@ import LabelList from 'components/Label/LabelList'
 
 class LabelContainer extends Component {
 
-  onChangeTargetLabel = (e) => {
+  timeout = null
+
+  handleClick = e => {
+    if(this.timeout) {
+      this.handleLabelEdit()
+      clearTimeout(this.timeout)
+      this.timeout = null
+    } else {
+      this.onChangeTargetLabel(e)
+      this.timeout = setTimeout(() => {
+        this.timeout = null
+      },200)
+    }
+  }
+
+  onChangeTargetLabel = (e) => { // click label event
+    console.log(e)
+    this.clickedOnce = undefined
     const { label } = this.props
     label.onChangeTargetLabel(e.target.value)
   }
 
-  addLabel = () => {
+  handleLabelEdit = () => { // doubleClick label event
+    const { label } = this.props
+    label.editLabel()
+  }
+
+  handleLabelAdd = () => {
     const { label } = this.props
     label.addLabel()
   }
@@ -31,7 +53,7 @@ class LabelContainer extends Component {
     if (e.charCode === 13) {
       await label.enrollLabel(newLabelName)
       .then(
-        this.addLabel()
+        this.handleLabelAdd()
       )
     }
   }
@@ -44,19 +66,6 @@ class LabelContainer extends Component {
     }, 1000 * 2)
   }
 
-  onDragStart = (e) => {
-    e.dataTransfer.setData('text/plain',e.target.id)
-    console.log(e.target.id)
-  }
-
-  onDragEnd = (e) => {
-    console.log(e.target.id)
-  }
-
-  onDrop = (e) => {
-    console.log(e.target.id)
-  }
-
   async componentDidMount(){
     try {
       this.getLabelList()
@@ -67,27 +76,32 @@ class LabelContainer extends Component {
 
 
   render() {
-    const { data, addLabelMode, targetLabel } = this.props
-    const { addLabel,onChangeNewLabelName,createNewLabel, onChangeTargetLabel } = this
+    const { data, addLabelMode, editLabelMode, targetLabel } = this.props
+    const { handleLabelAdd,onChangeNewLabelName,createNewLabel, onChangeTargetLabel,handleClick } = this
     return (
       <LabelList
         data={data}
         targetLabel={targetLabel}
         addLabelMode={addLabelMode}
-        addLabel={addLabel}
+        editLabelMode={editLabelMode}
+
+        handleLabelAdd={handleLabelAdd}
         onChangeNewLabelName={onChangeNewLabelName}
         createNewLabel={createNewLabel}
         onChangeTargetLabel={onChangeTargetLabel}
+        handleClick={handleClick}
       />
     );
   }
 }
+
 
 let mapStateToProps = state => {
   return {
     data : state.db.data,
     targetLabel : state.label.targetLabel,
     addLabelMode : state.label.addLabelMode,
+    editLabelMode : state.label.editLabelMode,
     newLabelName : state.label.newLabelName
   }
 }
@@ -99,4 +113,5 @@ let mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(LabelContainer))
+LabelContainer = DragDropContext(HTML5Backend)(LabelContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LabelContainer)

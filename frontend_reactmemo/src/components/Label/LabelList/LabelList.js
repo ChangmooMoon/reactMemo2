@@ -1,30 +1,12 @@
 import React from 'react';
 import styles from './LabelList.scss'
 import classNames from 'classnames/bind'
+import LabelItem from './LabelItem'
+import DeleteBin from './DeleteBin'
 
 import AddCircle from 'static/AddCircle'
-import Bin from 'static/Bin'
 
 const cx = classNames.bind(styles)
-
-const LabelItem = ({
-  labelName,
-  amount,
-  value,
-  targetLabel,
-  onClick,
-}) => {
-  const clicked = (value === targetLabel) ? 'clicked' : 'label'
-  return (
-      <label className={cx(clicked)} draggable='true' id={value}>
-        <input type='radio' className={cx('radio')} name='label' value={value} onClick={onClick}/>
-        <div>
-          {labelName}
-          ({amount})
-        </div>
-      </label>
-  )
-}
 
 const AddLabel = ({onClick}) => {
   return(
@@ -34,26 +16,15 @@ const AddLabel = ({onClick}) => {
   )
 }
 
-const DeleteLabel = () => {
-  return (
-    <span className={cx('bin-box')}>
-      <span className={cx('button','button2')}>
-        <Bin />
-      </span>
-    </span>
-  )
-}
-
 const NameNewLabel = ({onChange, onKeyPress}) => {
   return (
     <input
       type='text'
-      id='hello'
       className={cx('label', 'naming-label')}
       autoFocus
       onChange={onChange}
       onKeyPress={onKeyPress}
-      maxLength='16'
+      maxLength='11'
     />
   )
 }
@@ -61,11 +32,13 @@ const NameNewLabel = ({onChange, onKeyPress}) => {
 const LabelList = ({
   data,
   addLabelMode,
+  editLabelMode,
   targetLabel,
-  addLabel,
+  handleLabelAdd,
   onChangeNewLabelName,
   createNewLabel,
   onChangeTargetLabel,
+  handleClick
 }) => {
   if (!data) return null
   else {
@@ -74,8 +47,8 @@ const LabelList = ({
     },0)
     return (
     <div className={cx('label-list')}>
-      <DeleteLabel />
-      <LabelItem labelName={'All'} amount={amountAll} value={'All'} onClick={onChangeTargetLabel} targetLabel={targetLabel}/>
+      <DeleteBin />
+      <LabelItem labelName={'All'} amount={amountAll} value={'All'} onClick={onChangeTargetLabel} targetLabel={targetLabel} />
       {
         data.map(element => {
         return (
@@ -85,7 +58,9 @@ const LabelList = ({
             labelName={element.title}
             amount={element.memos.length}
             targetLabel={targetLabel}
-            onClick={onChangeTargetLabel}
+            editLabelMode={editLabelMode}
+            onChange={onChangeNewLabelName}
+            onClick={handleClick}
             />
           )
         })
@@ -98,7 +73,7 @@ const LabelList = ({
           />
         : null
       }
-      <AddLabel onClick={addLabel}/>
+      <AddLabel onClick={handleLabelAdd}/>
     </div>
   )}
 }

@@ -20,7 +20,7 @@ const MemoItem = ({
   contents = '미리보기내용이라네 이것도 너무 길어서 큰일일세'
 }) => {
   return(
-    <div className={cx('memo-item')} draggable='true'>
+    <div className={cx('memo-item')}>
       <div className={cx('title')}>{title}</div>
       <div className={cx('date')}>Created: {createdAt}</div>
       <div className={cx('contents')}>{contents}</div>
@@ -35,21 +35,6 @@ const MemoListBox = () => {
     <div className={cx('memo-list-box')}>
       <AddMemo />
       {MemoItems.map(item => item)}
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
-      <MemoItem />
     </div>
   );
 };
