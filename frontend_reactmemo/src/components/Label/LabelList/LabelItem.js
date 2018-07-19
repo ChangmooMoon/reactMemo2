@@ -8,6 +8,7 @@ const cx = classNames.bind(styles)
 const labelSource = {
   beginDrag(props) {
     return {
+      type: 'label',
       id : props.value,
     }
   }
@@ -26,12 +27,11 @@ const LabelItem = ({
 }) => {
   const clicked = (value === targetLabel) ? 'clicked' : 'label'
   return connectDragSource(
-      <label className={cx(clicked)} draggable='true' id={value} >
+      <label className={cx(clicked)} id={value} >
         <input type='radio' className={cx('radio')} name='label' value={value} onClick={onClick} />
         { editLabelMode && targetLabel === value ?
         (
           <input
-            placeholder='        edit mode'
             className={cx('edit')}
             type='text'
             autoFocus

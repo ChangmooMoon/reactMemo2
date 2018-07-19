@@ -12,7 +12,7 @@ const PageTemplate = ({children}) => {
   return (
     <div className={cx('template')}>
       <HamburgerModalContainer />
-      {/* <MemoModalContainer /> */}
+      <MemoModalContainer />
         <HeaderContainer/>
         <main>
           {children}

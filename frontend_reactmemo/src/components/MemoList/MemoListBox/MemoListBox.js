@@ -1,42 +1,78 @@
-import React from 'react';
+import React, { Fragment } from 'react'
 import styles from './MemoListBox.scss'
 import classNames from 'classnames/bind'
+import MemoItem from './MemoItem'
 
 import AddCircle from 'static/AddCircle'
 
 const cx = classNames.bind(styles)
 
-const AddMemo = () => {
-  return(
-    <span className={cx('memo-item','button')}>
+const AddMemo = ({
+  onClick
+}) => {
+  return (
+    <span className={cx('memo-item','button')} onClick={onClick}>
       <AddCircle />
     </span>
   )
 }
 
-const MemoItem = ({
-  title = '제목이 넘나 길어서 큰일일세',
-  createdAt = '2018-07-07',
-  contents = '미리보기내용이라네 이것도 너무 길어서 큰일일세'
+const MemoListBox = ({
+  memoData,
+  labelData,
+
+  openMemoModal,
+  targetLabel
 }) => {
-  return(
-    <div className={cx('memo-item')}>
-      <div className={cx('title')}>{title}</div>
-      <div className={cx('date')}>Created: {createdAt}</div>
-      <div className={cx('contents')}>{contents}</div>
-    </div>
-  )
+  if(!memoData || !labelData) return null
+  else {
+    const targetLabelMemoData = labelData.find(element => element._id === targetLabel )
+    return (
+      <div className={cx('memo-list-box')}>
+        {
+          targetLabel === 'All' && memoData.length === 0 ?
+          <span className={cx('memo-item','button')}>
+              메모가 없습니다
+          </span>
+          : null
+        }
+        {
+          targetLabel === 'All' ?
+            (
+              memoData.map(element => (
+                <MemoItem
+                  key={element._id}
+                  value={element._id}
+                  title={element.title}
+                  createdAt={element.createdAt}
+                  content={element.content}
+
+                  onClick={openMemoModal}
+              />))
+            )
+            :
+            (
+              <Fragment>
+                <AddMemo onClick={openMemoModal}/>
+                {
+                  targetLabelMemoData.memos.map(element => (
+                    <MemoItem
+                      key={element._id}
+                      value={element._id}
+                      title={element.title}
+                      createdAt={element.createdAt}
+                      content={element.content}
+
+                      onClick={openMemoModal}
+                      />
+                  ))
+                }
+              </Fragment>
+
+            )
+        }
+      </div>
+    )}
 }
-
-let MemoItems = [<MemoItem />]
-
-const MemoListBox = () => {
-  return (
-    <div className={cx('memo-list-box')}>
-      <AddMemo />
-      {MemoItems.map(item => item)}
-    </div>
-  );
-};
 
 export default MemoListBox;

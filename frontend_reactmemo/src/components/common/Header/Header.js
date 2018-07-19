@@ -26,7 +26,7 @@ const SearchBar = ({
       <input
         className={cx('bar')}
         type="text"
-        placeholder="search"
+        placeholder="title search"
         value={keyword}
         onChange={changeSearchKeyword}
         />

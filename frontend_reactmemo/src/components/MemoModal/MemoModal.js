@@ -1,28 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './MemoModal.scss'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-class MemoModal extends React.Component {
-  render() {
-    if(!this.props.show) {
-      return null;
-    }
-    return (
+const MemoModal = ({
+  isOpen,
+  title,
+  content,
+  readMode,
+
+  toggleModal,
+  typeMemoTitle,
+  typeMemoContent,
+  createMemo,
+  clearMemo,
+  closeMemo,
+  handleReadMode
+}) => {
+    if(!isOpen) return null
+    else {
+      return (
       <div className={cx('backdrop')}>
         <div className={cx('modal')}>
 
           <div className={cx('pad-top')}>
             <div className={cx('button-group')}>
-              <button className={cx('button')}>
+              <button className={cx('button')} onClick={closeMemo}>
                 CLOSE
               </button>
-              <button className={cx('button')}>
+              <button className={cx('button')} onClick={clearMemo}>
                 CLEAR
               </button>
-              <button className={cx('button')}>
+              <button className={cx('button')} onClick={createMemo}>
                 SAVE
               </button>
             </div>
@@ -35,7 +45,11 @@ class MemoModal extends React.Component {
                   type='text'
                   className={cx('title')}
                   placeholder='Untitled Memo'
-                  autoFocus
+                  value={title}
+                  onChange={typeMemoTitle}
+                  onClick={handleReadMode}
+                  readOnly={readMode}
+                  maxLength='25'
                   />
               </div>
 
@@ -44,18 +58,18 @@ class MemoModal extends React.Component {
                 <textarea
                   className={cx('content')}
                   placeholder='Start typing your Memo'
+                  value={content}
+                  autoFocus
+                  onChange={typeMemoContent}
+                  onClick={handleReadMode}
+                  readOnly={readMode}
                   />
               </div>
             </div>
           </div>
         </div>
-    );
+      )
+    }
   }
-}
-
-MemoModal.defaultProps = {
-  title : 'Untitled Memo',
-  contents: ''
-}
 
 export default MemoModal;

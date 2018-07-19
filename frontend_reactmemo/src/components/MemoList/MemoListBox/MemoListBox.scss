@@ -13,6 +13,8 @@
 }
 
 .memo-item {
+  width: 240px;
+  height: 240px;
   border: none;
   padding: 1.5rem;
   background: $page-color;
@@ -40,16 +42,17 @@
   display: grid;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  grid-auto-columns: 200px;
-  @include media('<970px') { //872
+  grid-template-columns: repeat(5, 1fr);
+  @include media('<1200px') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @include media('<940px') {
     grid-template-columns: repeat(3, 1fr);
   }
-  @include media('<600px') { // 540
+  @include media('<680px') {
     grid-template-columns: repeat(2, 1fr);
   }
-  @include media('<=450px') {
+  @include media('<420px') {
     grid-template-columns: repeat(1, 1fr);
   }
 }

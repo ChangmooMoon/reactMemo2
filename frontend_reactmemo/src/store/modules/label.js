@@ -56,6 +56,9 @@ export const deleteLabel = (id) => dispatch => {
         type: DELETE_LABEL_SUCCESS,
         payload:res
       })
+      return res.data.memos.forEach(element => {
+        api.deleteMemo(element._id)
+      })
     })
     .catch(
       err => {

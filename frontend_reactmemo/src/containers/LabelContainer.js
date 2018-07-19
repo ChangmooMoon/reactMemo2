@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { DragDropContext } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+import withDragDropContext from 'lib/withDragDropContext'
 
 import * as db from 'store/modules/db'
 import * as label from 'store/modules/label'
@@ -35,6 +34,7 @@ class LabelContainer extends Component {
   handleLabelEdit = () => { // doubleClick label event
     const { label } = this.props
     label.editLabel()
+    label.onChangeNewLabelName(null)
   }
 
   handleLabelAdd = () => {
@@ -71,7 +71,7 @@ class LabelContainer extends Component {
     db.getLabelList()
     setTimeout( () => {
       this.getLabelList()
-    }, 1000 * 2)
+    }, 1000 * 3)
   }
 
   async componentDidMount(){
@@ -84,11 +84,12 @@ class LabelContainer extends Component {
 
 
   render() {
-    const { data, addLabelMode, editLabelMode, targetLabel } = this.props
+    const { data,memoData, addLabelMode, editLabelMode, targetLabel } = this.props
     const { handleLabelAdd,onChangeNewLabelName,createNewLabel,editLabelName, onChangeTargetLabel,handleClick } = this
     return (
       <LabelList
         data={data}
+        memoData={memoData}
         targetLabel={targetLabel}
         addLabelMode={addLabelMode}
         editLabelMode={editLabelMode}
@@ -107,7 +108,8 @@ class LabelContainer extends Component {
 
 let mapStateToProps = state => {
   return {
-    data : state.db.data,
+    data : state.db.labelData,
+    memoData : state.db.memoData,
     targetLabel : state.label.targetLabel,
     addLabelMode : state.label.addLabelMode,
     editLabelMode : state.label.editLabelMode,
@@ -122,5 +124,5 @@ let mapDispatchToProps = dispatch => {
   }
 }
 
-LabelContainer = DragDropContext(HTML5Backend)(LabelContainer)
+LabelContainer = withDragDropContext(LabelContainer)
 export default connect(mapStateToProps, mapDispatchToProps)(LabelContainer)

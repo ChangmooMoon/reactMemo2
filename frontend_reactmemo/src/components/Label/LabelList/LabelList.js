@@ -31,6 +31,7 @@ const NameNewLabel = ({onChange, onKeyPress}) => {
 
 const LabelList = ({
   data,
+  memoData,
   addLabelMode,
   editLabelMode,
   targetLabel,
@@ -41,15 +42,13 @@ const LabelList = ({
   onChangeTargetLabel,
   handleClick
 }) => {
-  if (!data) return null
+  if (!data || !memoData) return null
   else {
-    const amountAll = data.reduce((a,b) => {
-      return a + b.memos.length
-    },0)
+    const memoLength = memoData.length
     return (
     <div className={cx('label-list')}>
       <DeleteBin />
-      <LabelItem labelName={'All'} amount={amountAll} value={'All'} onClick={onChangeTargetLabel} targetLabel={targetLabel} />
+      <LabelItem labelName={'All'} amount={memoLength} value={'All'} onClick={onChangeTargetLabel} targetLabel={targetLabel} />
       {
         data.map(element => {
         return (

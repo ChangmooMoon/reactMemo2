@@ -7,18 +7,23 @@ import { connect } from 'react-redux'
 import Bin from 'static/Bin'
 
 import * as label from 'store/modules/label'
+import * as memoList from 'store/modules/memoList'
 
 
 const cx = classNames.bind(styles)
 
 const labelTarget = {
   drop(props, monitor,component) {
-    console.log(props)
     const id = monitor.getItem().id
-    if(props.targetLabel === id) {
-      props.label.resetTargetLabel()
+    if(monitor.getItem().type === 'label') {
+      if(props.targetLabel === id) {
+        props.label.resetTargetLabel()
+      }
+      props.label.deleteLabel(id)
     }
-    props.label.deleteLabel(id)
+    else if(monitor.getItem().type === 'memo') {
+      props.memoList.deleteMemo(id)
+    }
   }
 }
 
@@ -34,9 +39,10 @@ class DeleteBin extends Component {
   )}
 }
 
-DeleteBin = DropTarget('label',labelTarget,(connect,monitor) => ({
+DeleteBin = DropTarget(['label','memo'],labelTarget,(connect,monitor) => ({
   connectDropTarget: connect.dropTarget()
 }))(DeleteBin)
+
 
 let mapStateToProps = state => {
   return {
@@ -46,7 +52,8 @@ let mapStateToProps = state => {
 
 let mapDispatchToProps = dispatch => {
   return {
-    label: bindActionCreators(label, dispatch)
+    label: bindActionCreators(label, dispatch),
+    memoList : bindActionCreators(memoList, dispatch)
   }
 }
 
