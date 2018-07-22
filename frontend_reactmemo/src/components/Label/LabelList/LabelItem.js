@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import styles from './LabelList.scss'
 import classNames from 'classnames/bind'
 import { DragSource } from 'react-dnd'
+import { Link, withRouter } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 
@@ -55,7 +56,6 @@ const LabelItem = ({
       </label>
   )
 }
-
 export default DragSource('label',labelSource, connect => ({
   connectDragSource: connect.dragSource()
-}))(LabelItem)
+}))(withRouter(LabelItem))

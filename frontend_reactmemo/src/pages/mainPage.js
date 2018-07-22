@@ -7,12 +7,12 @@ import LabelContainer from 'containers/LabelContainer'
 import MemoListBoxWrapper from 'components/MemoList/MemoListBoxWrapper'
 import MemoListContainer from 'containers/MemoListContainer'
 
-const mainPage = () => {
+const mainPage = ({history}) => {
   return (
     <PageTemplate>
 
       <LabelListWrapper>
-        <LabelContainer />
+        <LabelContainer history={history}/>
       </LabelListWrapper>
 
       <MemoListBoxWrapper>

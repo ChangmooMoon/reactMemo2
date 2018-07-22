@@ -26,9 +26,12 @@ class LabelContainer extends Component {
   }
 
   onChangeTargetLabel = (e) => { // click label event
-    this.clickedOnce = undefined
-    const { label } = this.props
-    label.onChangeTargetLabel(e.target.value)
+    const { label, history, state } = this.props
+    history.push({
+      pathname: `/${e.target.value}`,
+      state: e.target.value
+    })
+    label.onChangeTargetLabel(e.currentTarget.value)
   }
 
   handleLabelEdit = () => { // doubleClick label event
@@ -106,14 +109,17 @@ class LabelContainer extends Component {
 }
 
 
-let mapStateToProps = state => {
+let mapStateToProps = (state,ownProps) => {
   return {
     data : state.db.labelData,
     memoData : state.db.memoData,
     targetLabel : state.label.targetLabel,
     addLabelMode : state.label.addLabelMode,
     editLabelMode : state.label.editLabelMode,
-    newLabelName : state.label.newLabelName
+    newLabelName : state.label.newLabelName,
+    history: ownProps.history,
+    state: state,
+    match: ownProps.match
   }
 }
 
