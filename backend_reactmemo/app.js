@@ -1,3 +1,8 @@
+require('dotenv').config()
+const {
+  PORT: port = 3001,
+  MONGO_URI: mongoURI
+} = process.env
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');

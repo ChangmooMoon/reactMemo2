@@ -26,10 +26,10 @@ class LabelContainer extends Component {
   }
 
   onChangeTargetLabel = (e) => { // click label event
-    const { label, history, state } = this.props
+    const { label, history, targetLabel } = this.props
     history.push({
       pathname: `/${e.target.value}`,
-      state: e.target.value
+      state: targetLabel
     })
     label.onChangeTargetLabel(e.currentTarget.value)
   }
@@ -85,6 +85,16 @@ class LabelContainer extends Component {
     }
   }
 
+  // componentDidUpdate(prevProps,prevState,snapshot) {
+  //   if(this.props.history.action === 'POP'
+  // ){
+  //   console.log(prevProps.history.location.state)
+  //   console.log(this.props.history.location.state)
+  //   }
+  //   // prevProps.targetLabel !== this.props.targetLabel)
+  //   // this.props.label.onChangeTargetLabel('hi')
+// 미구현. history 관리하는 로직 공부를 좀 더 해야겠다
+  // }
 
   render() {
     const { data,memoData, addLabelMode, editLabelMode, targetLabel } = this.props

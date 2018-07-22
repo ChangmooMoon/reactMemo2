@@ -17,7 +17,7 @@ class MemoListContainer extends Component {
     db.getAllMemoList()
     setTimeout(() => {
       this.getAllMemoList()
-    }, 1000 * 2)
+    }, 1000 * 3)
   }
   openMemoModal = (e) => {
     const { memoModal, memoList, memoData } = this.props
